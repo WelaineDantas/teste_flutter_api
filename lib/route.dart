@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste_flutter_api/home_page.dart';
+import 'package:teste_flutter_api/lista_produtos.dart';
 import 'package:teste_flutter_api/splash_page.dart';
 
 class Rotas {
@@ -12,6 +13,10 @@ class Rotas {
       case "HOMEPAGE":
         return MaterialPageRoute(
           builder: (_) => HomePage(),
+        );
+      case "PRODUTOSCADASTRADOS":
+        return MaterialPageRoute(
+          builder: (_) => ProdutosCadastrados(),
         );
       default:
         _erroRota();
