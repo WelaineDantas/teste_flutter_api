@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -7,6 +9,15 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    Timer(
+        Duration(seconds: 4),
+        () => Navigator.restorablePushNamedAndRemoveUntil(
+            context, "HOMEPAGE", (route) => false));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
