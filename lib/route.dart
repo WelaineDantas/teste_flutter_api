@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste_flutter_api/home_page.dart';
-import 'package:teste_flutter_api/lista_produtos.dart';
+import 'package:teste_flutter_api/produtos_cadastrados.dart';
 import 'package:teste_flutter_api/splash_page.dart';
 
 class Rotas {
