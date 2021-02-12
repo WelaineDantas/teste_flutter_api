@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teste_flutter_api/alert_dioalog.dart';
 import 'package:teste_flutter_api/produtos_cadastrados.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     List<Widget> telas = [
       null,
       null,
-      null,
+      AlertDialogCustomizado(),
       null,
       null,
     ];
