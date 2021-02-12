@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1034317643895",
-    "project_id": "teste-grupfy",
-    "storage_bucket": "teste-grupfy.appspot.com"
+    "project_number": "312656569105",
+    "project_id": "teste-grupfy-7495c",
+    "storage_bucket": "teste-grupfy-7495c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1034317643895:android:e7a82ee941bc8d299f4672",
+        "mobilesdk_app_id": "1:312656569105:android:ecd25e877d4755b7c8a2b0",
         "android_client_info": {
           "package_name": "com.example.teste_flutter_api"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1034317643895-e5jflsmaeo1oibfc2a5s679h53oapeq7.apps.googleusercontent.com",
+          "client_id": "312656569105-81qkhsanvl6sfr7el8492okueiegvhli.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyARMcvixBm_qhZ7cpzJ_3aiZ87mnSYUzpA"
+          "current_key": "AIzaSyBYfFklmbn5cWZNF9lXZ1erBOPlRFeJbdY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1034317643895-e5jflsmaeo1oibfc2a5s679h53oapeq7.apps.googleusercontent.com",
+              "client_id": "312656569105-81qkhsanvl6sfr7el8492okueiegvhli.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
