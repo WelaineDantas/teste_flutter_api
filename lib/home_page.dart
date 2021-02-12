@@ -12,7 +12,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> telas = [
-      ProdutosCadastrados(),
+      null,
+      null,
+      null,
+      null,
+      null,
     ];
 
     return Scaffold(
@@ -35,6 +39,7 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _indiceAtual,
+        fixedColor: Colors.white,
         onTap: (indice) {
           setState(() {
             _indiceAtual = indice;
@@ -44,9 +49,27 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Início",
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline_rounded), label: "Minha Conta"),
+            icon: Icon(Icons.error_outline_rounded),
+            label: "Vencidos",
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle_outline_rounded),
+            label: "Adicionar item",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline_rounded),
+            label: "Minha Conta",
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.build_circle_outlined),
+            label: "Configurações",
+            backgroundColor: Colors.blue,
+          ),
         ],
       ),
     );
