@@ -17,6 +17,12 @@ class AlertDialogCustomizado extends StatelessWidget {
     db.collection("produtos").add(produto.toMap());
   }
 
+  limparCampos() {
+    controllerNome.clear();
+    controllerQuantidade.clear();
+    controllerValidade.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -57,6 +63,7 @@ class AlertDialogCustomizado extends StatelessWidget {
                 controllerQuantidade.text,
                 controllerValidade.text,
               );
+              limparCampos();
             }),
         FlatButton(
           child: Text("Cancelar"),
