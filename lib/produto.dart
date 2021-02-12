@@ -1,7 +1,7 @@
 class Produto {
   String _nome;
-  int _quantidade;
-  int _validade;
+  String _quantidade;
+  String _validade;
 
   Produto();
 
@@ -21,15 +21,15 @@ class Produto {
     _nome = value;
   }
 
-  int get quantidade => _quantidade;
+  String get quantidade => _quantidade;
 
-  set quantidade(int value) {
+  set quantidade(String value) {
     _quantidade = value;
   }
 
-  int get validade => _validade;
+  String get validade => _validade;
 
-  set validade(int value) {
+  set validade(String value) {
     _validade = value;
   }
 }
