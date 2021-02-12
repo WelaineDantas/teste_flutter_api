@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teste_flutter_api/alert_dioalog.dart';
+import 'package:teste_flutter_api/alert_dialog.dart';
 import 'package:teste_flutter_api/produtos_cadastrados.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.error_outline_rounded),
-            label: "Vencidos",
+            label: "Itens Vencidos",
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
             label: "Adicionar item",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded),
+            icon: Icon(Icons.person),
             label: "Minha Conta",
             backgroundColor: Colors.blue,
           ),
