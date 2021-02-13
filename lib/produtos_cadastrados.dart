@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:teste_flutter_api/produto.dart';
 
 class ProdutosCadastrados extends StatefulWidget {
   @override
@@ -12,6 +13,10 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   final controllerListaProdutos = StreamController<QuerySnapshot>.broadcast();
   String produtoSelecionado = "----";
   bool produtoBool = false;
+  String id;
+  String nome;
+  String quantidade;
+  String validade;
 
   Stream<QuerySnapshot> adicionarListenerProdutos() {
     FirebaseFirestore db = FirebaseFirestore.instance;
@@ -22,7 +27,23 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
     });
   }
 
-  recuperardadosProduto() {}
+  Future<Produto> recuperarDadosProduto({String idProduto}) async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    DocumentSnapshot snapshot =
+        await db.collection("produtos").doc(idProduto).get();
+
+    Map<String, dynamic> dados = snapshot.data();
+    String nome = dados["nome"];
+    String quantidade = dados["quantidade"];
+    String validade = dados["validade"];
+
+    Produto produto = Produto();
+    produto.nome = nome;
+    produto.quantidade = quantidade;
+    produto.validade = validade;
+
+    return produto;
+  }
 
   @override
   void initState() {
@@ -83,6 +104,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                 DocumentSnapshot item = produtos[index];
 
                                 String produto = item["nome"];
+                                id = item.id;
 
                                 return ListTile(
                                   title: Text(produto),
@@ -91,6 +113,9 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                     setState(() {
                                       produtoSelecionado = produto;
                                       produtoBool = true;
+                                      nome = item["nome"];
+                                      quantidade = item["quantidade"];
+                                      validade = item["validade"];
                                     });
                                   },
                                 );
@@ -98,6 +123,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                             );
                           }
                         }
+
                         break;
                       default:
                     }
@@ -115,13 +141,17 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
               produtoBool
                   ? Container(
                       decoration: BoxDecoration(
-                          border: Border.all(
-                        color: Colors.grey,
-                      )),
-                      child: Center(
-                        child: Text("Dados"),
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
                       ),
-                    )
+                      child: Column(
+                        children: [
+                          Text("Quantidade: $quantidade"),
+                          Divider(),
+                          Text("Validade: $validade"),
+                        ],
+                      ))
                   : Container(),
               SizedBox(height: 20),
               Row(
@@ -136,7 +166,23 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                       ),
                     ),
                     heroTag: null,
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    TextField(
+                                      //controller: ,
+                                      decoration: InputDecoration(
+                                        labelText: "Nome",
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ));
+                    },
                   ),
                   FloatingActionButton.extended(
                     icon: Icon(Icons.delete),
