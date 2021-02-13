@@ -10,6 +10,7 @@ class ProdutosCadastrados extends StatefulWidget {
 
 class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   final controllerListaProdutos = StreamController<QuerySnapshot>.broadcast();
+  String produtoSelecionado;
 
   Stream<QuerySnapshot> adicionarListenerProdutos() {
     FirebaseFirestore db = FirebaseFirestore.instance;
@@ -38,6 +39,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
             Text("Lista de Produtos cadastrados:"),
             SizedBox(height: 20),
             Container(
+                height: 200,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.blue,
@@ -71,7 +73,17 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                     querySnapshot.docs.toList();
                                 DocumentSnapshot item = produtos[index];
 
-                                return ListTile();
+                                String produto = item["nome"];
+
+                                return ListTile(
+                                  title: Text(produto),
+                                  selected: produto == produtoSelecionado,
+                                  onTap: () {
+                                    setState(() {
+                                      produtoSelecionado = produto;
+                                    });
+                                  },
+                                );
                               },
                             );
                           }
