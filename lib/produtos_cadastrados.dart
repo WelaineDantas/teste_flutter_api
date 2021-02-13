@@ -21,6 +21,8 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
     });
   }
 
+  recuperardadosProduto() {}
+
   @override
   void initState() {
     adicionarListenerProdutos();
@@ -34,18 +36,23 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
           title: Text("Produtos"),
         ),
         body: SingleChildScrollView(
-            child: Column(
-          children: [
-            Text("Lista de Produtos cadastrados:"),
-            SizedBox(height: 20),
-            Container(
-                height: 200,
+            child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Lista de Produtos cadastrados:",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+              SizedBox(height: 20),
+              Container(
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.blue,
                     width: 3,
                   ),
                 ),
+                height: MediaQuery.of(context).size.height / 2.5,
+                width: MediaQuery.of(context).size.width,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: controllerListaProdutos.stream,
                   builder: (context, snapshot) {
@@ -67,6 +74,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                               itemCount: querySnapshot.docs.length,
                               separatorBuilder: (context, index) => Divider(
                                 height: 2,
+                                color: Colors.blue,
                               ),
                               itemBuilder: (context, index) {
                                 List<DocumentSnapshot> produtos =
@@ -92,8 +100,45 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                       default:
                     }
                   },
-                ))
-          ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Produto selecionado: ",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FloatingActionButton.extended(
+                    icon: Icon(Icons.edit_rounded),
+                    label: Text(
+                      "Editar",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                  FloatingActionButton.extended(
+                    icon: Icon(Icons.delete),
+                    label: Text(
+                      "Excluir",
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    backgroundColor: Colors.red[400],
+                    onPressed: () {},
+                  )
+                ],
+              )
+            ],
+          ),
         )));
   }
 }
