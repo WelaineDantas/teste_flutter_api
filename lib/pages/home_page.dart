@@ -13,9 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<Widget> telas = [
       null,
-      null,
       AlertDialogCustomizado(),
-      null,
       null,
     ];
 
@@ -38,6 +36,8 @@ class _HomePageState extends State<HomePage> {
         child: telas[_indiceAtual],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blue,
+        type: BottomNavigationBarType.fixed,
         currentIndex: _indiceAtual,
         fixedColor: Colors.white,
         onTap: (indice) {
@@ -49,26 +49,14 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Início",
-            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.error_outline_rounded),
-            label: "Itens Vencidos",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline_rounded),
             label: "Adicionar item",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Minha Conta",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Configurações",
-            backgroundColor: Colors.blue,
+            icon: Icon(Icons.add_circle_outline_rounded),
+            label: "Itens Vencidos",
           ),
         ],
       ),
