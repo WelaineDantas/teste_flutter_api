@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:teste_flutter_api/produto.dart';
+import 'package:teste_flutter_api/model/produto.dart';
 
 class AlertDialogCustomizado extends StatelessWidget {
   var controllerNome = TextEditingController();

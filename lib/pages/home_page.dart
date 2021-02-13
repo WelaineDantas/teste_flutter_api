@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teste_flutter_api/alert_dialog.dart';
+import 'package:teste_flutter_api/widget/alert_dialog.dart';
 
 class HomePage extends StatefulWidget {
   @override

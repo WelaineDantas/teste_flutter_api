@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teste_flutter_api/home_page.dart';
-import 'package:teste_flutter_api/produtos_cadastrados.dart';
-import 'package:teste_flutter_api/splash_page.dart';
+import 'package:teste_flutter_api/pages/home_page.dart';
+import 'package:teste_flutter_api/pages/produtos_cadastrados.dart';
+import 'package:teste_flutter_api/pages/splash_page.dart';
 
 class Rotas {
   static Route<dynamic> gerarRotas(RouteSettings settings) {
