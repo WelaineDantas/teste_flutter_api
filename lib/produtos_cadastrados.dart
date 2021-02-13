@@ -122,6 +122,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                         fontSize: 16,
                       ),
                     ),
+                    heroTag: null,
                     onPressed: () {},
                   ),
                   FloatingActionButton.extended(
@@ -133,6 +134,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                       ),
                     ),
                     backgroundColor: Colors.red[400],
+                    heroTag: null,
                     onPressed: () {},
                   )
                 ],
