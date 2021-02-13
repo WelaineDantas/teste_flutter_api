@@ -10,7 +10,8 @@ class ProdutosCadastrados extends StatefulWidget {
 
 class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   final controllerListaProdutos = StreamController<QuerySnapshot>.broadcast();
-  String produtoSelecionado;
+  String produtoSelecionado = "----";
+  bool produtoBool = false;
 
   Stream<QuerySnapshot> adicionarListenerProdutos() {
     FirebaseFirestore db = FirebaseFirestore.instance;
@@ -37,7 +38,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
         ),
         body: SingleChildScrollView(
             child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -89,6 +90,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                   onTap: () {
                                     setState(() {
                                       produtoSelecionado = produto;
+                                      produtoBool = true;
                                     });
                                   },
                                 );
@@ -104,12 +106,23 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
               ),
               SizedBox(height: 20),
               Text(
-                "Produto selecionado: ",
+                "Produto selecionado: $produtoSelecionado",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              produtoBool
+                  ? Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                        color: Colors.grey,
+                      )),
+                      child: Center(
+                        child: Text("Dados"),
+                      ),
+                    )
+                  : Container(),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -136,7 +149,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                     backgroundColor: Colors.red[400],
                     heroTag: null,
                     onPressed: () {},
-                  )
+                  ),
                 ],
               )
             ],
