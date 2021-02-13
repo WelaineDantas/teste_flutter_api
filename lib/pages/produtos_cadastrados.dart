@@ -152,16 +152,26 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
               ),
               produtoBool
                   ? Container(
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                        ),
+                        border: Border.all(color: Colors.grey, width: 3),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Quantidade: $quantidade"),
+                          Text(
+                            "   Quantidade: $quantidade",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                           Divider(),
-                          Text("Validade: $validade"),
+                          Text(
+                            "   Validade: $validade",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
                         ],
                       ))
                   : Container(),
