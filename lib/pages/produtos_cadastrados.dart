@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:teste_flutter_api/model/produto.dart';
+import 'package:teste_flutter_api/widget/floating_action_button.dart';
 
 class ProdutosCadastrados extends StatefulWidget {
   @override
@@ -21,27 +20,9 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
 
   Stream<QuerySnapshot> adicionarListenerProdutos() {
     final stream = db.collection("produtos").snapshots();
-
     stream.listen((dados) {
       controllerListaProdutos.add(dados);
     });
-  }
-
-  Future<Produto> recuperarDadosProduto({String idProduto}) async {
-    DocumentSnapshot snapshot =
-        await db.collection("produtos").doc(idProduto).get();
-
-    Map<String, dynamic> dados = snapshot.data();
-    String nome = dados["nome"];
-    String quantidade = dados["quantidade"];
-    String validade = dados["validade"];
-
-    Produto produto = Produto();
-    produto.nome = nome;
-    produto.quantidade = quantidade;
-    produto.validade = validade;
-
-    return produto;
   }
 
   atualizarDadosProduto(String nome, String quantidade, String validade) {
@@ -74,8 +55,13 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Lista de Produtos cadastrados:",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+              Text(
+                "Lista de Produtos cadastrados:",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
@@ -115,7 +101,6 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                 DocumentSnapshot item = produtos[index];
 
                                 String produto = item["nome"];
-                                //id = item.id;
 
                                 return ListTile(
                                   title: Text(produto),
@@ -135,7 +120,6 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                             );
                           }
                         }
-
                         break;
                       default:
                     }
@@ -173,21 +157,16 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                             ),
                           ),
                         ],
-                      ))
+                      ),
+                    )
                   : Container(),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FloatingActionButton.extended(
+                  FloatingActionButtonCustomizado(
                     icon: Icon(Icons.edit_rounded),
-                    label: Text(
-                      "Editar",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    heroTag: null,
+                    text: "Editar",
                     onPressed: () {
                       showDialog(
                           context: context,
@@ -208,13 +187,14 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                       initialValue: quantidade,
                                       decoration: InputDecoration(
                                           labelText: "Quantidade"),
+                                      keyboardType: TextInputType.number,
                                     ),
                                     TextFormField(
                                       onChanged: (value) => validade = value,
                                       initialValue: validade,
                                       decoration: InputDecoration(
                                           labelText: "Validade"),
-                                      //onChanged: ,
+                                      keyboardType: TextInputType.datetime,
                                     )
                                   ],
                                 ),
@@ -236,16 +216,10 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                               ));
                     },
                   ),
-                  FloatingActionButton.extended(
+                  FloatingActionButtonCustomizado(
                     icon: Icon(Icons.delete),
-                    label: Text(
-                      "Excluir",
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    backgroundColor: Colors.red[400],
-                    heroTag: null,
+                    text: "Excluir",
+                    color: Colors.red[400],
                     onPressed: deletarProduto,
                   ),
                 ],
