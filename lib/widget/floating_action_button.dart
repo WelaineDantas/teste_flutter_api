@@ -11,7 +11,7 @@ class FloatingActionButtonCustomizado extends StatelessWidget {
     this.text,
     this.color,
     this.onPressed,
-  })
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class FloatingActionButtonCustomizado extends StatelessWidget {
       backgroundColor: color,
       heroTag: null,
       onPressed: onPressed,
-
     );
   }
 }
