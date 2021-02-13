@@ -11,6 +11,8 @@ class ProdutosCadastrados extends StatefulWidget {
 
 class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   final controllerListaProdutos = StreamController<QuerySnapshot>.broadcast();
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  var controllerNome = TextEditingController();
   String produtoSelecionado = "----";
   bool produtoBool = false;
   String id;
@@ -19,7 +21,6 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   String validade;
 
   Stream<QuerySnapshot> adicionarListenerProdutos() {
-    FirebaseFirestore db = FirebaseFirestore.instance;
     final stream = db.collection("produtos").snapshots();
 
     stream.listen((dados) {
@@ -28,7 +29,6 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
   }
 
   Future<Produto> recuperarDadosProduto({String idProduto}) async {
-    FirebaseFirestore db = FirebaseFirestore.instance;
     DocumentSnapshot snapshot =
         await db.collection("produtos").doc(idProduto).get();
 
@@ -43,6 +43,18 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
     produto.validade = validade;
 
     return produto;
+  }
+
+  atualizarDadosProduto(String nome, String quantidade, String validade) {
+    db.collection("produtos").doc(id).update({
+      "nome": nome,
+      "quantidade": quantidade,
+      "validade": validade,
+    });
+  }
+
+  deletarProduto() {
+    db.collection("produtos").doc(id).delete();
   }
 
   @override
@@ -104,13 +116,14 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                                 DocumentSnapshot item = produtos[index];
 
                                 String produto = item["nome"];
-                                id = item.id;
+                                //id = item.id;
 
                                 return ListTile(
                                   title: Text(produto),
                                   selected: produto == produtoSelecionado,
                                   onTap: () {
                                     setState(() {
+                                      id = item.id;
                                       produtoSelecionado = produto;
                                       produtoBool = true;
                                       nome = item["nome"];
@@ -170,17 +183,38 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                                title: Text("Editar Produto"),
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    TextField(
-                                      //controller: ,
+                                    TextFormField(
+                                      //controller: controllerNome,
+                                      initialValue: nome,
                                       decoration: InputDecoration(
                                         labelText: "Nome",
                                       ),
+                                    ),
+                                    TextFormField(
+                                      //controller: ,
+                                      initialValue: quantidade,
+                                      decoration: InputDecoration(
+                                          labelText: "Quantidade"),
+                                    ),
+                                    TextFormField(
+                                      initialValue: validade,
+                                      decoration: InputDecoration(
+                                          labelText: "Validade"),
+                                      //onChanged: ,
                                     )
                                   ],
                                 ),
+                                actions: [
+                                  FlatButton(
+                                    child: Text("Atualizar"),
+                                    onPressed: atualizarDadosProduto(
+                                        nome, quantidade, validade),
+                                  )
+                                ],
                               ));
                     },
                   ),
@@ -194,7 +228,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                     ),
                     backgroundColor: Colors.red[400],
                     heroTag: null,
-                    onPressed: () {},
+                    onPressed: deletarProduto,
                   ),
                 ],
               )
