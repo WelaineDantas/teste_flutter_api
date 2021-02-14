@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class TextCustomizado extends StatelessWidget {
   String text;
   double fontSize;
+  FontWeight fontWeight;
 
   TextCustomizado({
     this.text,
     this.fontSize,
+    this.fontWeight,
   });
 
   @override
@@ -15,6 +17,7 @@ class TextCustomizado extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: fontSize,
+        fontWeight: fontWeight,
       ),
     );
   }
