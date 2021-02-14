@@ -78,7 +78,7 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
                       case ConnectionState.waiting:
-                        return Text("Carregando...");
+                        return Center(child: CircularProgressIndicator());
                         break;
                       case ConnectionState.active:
                       case ConnectionState.done:
@@ -87,7 +87,9 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                         } else {
                           QuerySnapshot querySnapshot = snapshot.data;
                           if (querySnapshot.docs.length == 0) {
-                            return Text("Nenhum produto foi cadastrado.");
+                            return Center(
+                              child: Text("Nenhum produto foi cadastrado."),
+                            );
                           } else {
                             return ListView.separated(
                               itemCount: querySnapshot.docs.length,
@@ -217,11 +219,30 @@ class _ProdutosCadastradosState extends State<ProdutosCadastrados> {
                     },
                   ),
                   FloatingActionButtonCustomizado(
-                    icon: Icon(Icons.delete),
-                    text: "Excluir",
-                    color: Colors.red[400],
-                    onPressed: deletarProduto,
-                  ),
+                      icon: Icon(Icons.delete),
+                      text: "Excluir",
+                      color: Colors.red[400],
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: Text(
+                                      "Deseja excluir o produto:  $produtoSelecionado"),
+                                  actions: [
+                                    FlatButton(
+                                      child: Text("Sim"),
+                                      onPressed: () {
+                                        deletarProduto();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    FlatButton(
+                                      child: Text("Não"),
+                                      onPressed: () => Navigator.pop(context),
+                                    )
+                                  ],
+                                ));
+                      }),
                 ],
               )
             ],
