@@ -51,11 +51,11 @@ class _HomePageState extends State<HomePage> {
             label: "Início",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.error_outline_rounded),
+            icon: Icon(Icons.add_circle_outline_rounded),
             label: "Adicionar item",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline_rounded),
+            icon: Icon(Icons.error_outline_rounded),
             label: "Itens Vencidos",
           ),
         ],
